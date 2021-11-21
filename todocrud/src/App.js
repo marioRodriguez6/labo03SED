@@ -7,17 +7,23 @@ class App extends Component {
     event.preventDefault();
     let name = this.refs.name.value;
     let description = this.refs.description.value;
+    let counter = this.state.counter;
 
     let todo = {
       name: name,
-      description: description
+      description: description,
+      counter: counter
     }
+
+    counter+=1;
+
     let todos = this.state.todos;
     todos.push(todo);
 
-    
+
     this.setState({
-      todos: todos
+      todos: todos,
+      counter: counter
     });
   }
 
@@ -25,11 +31,13 @@ class App extends Component {
     super();
     this.state = {
       todos: [],
-      title: 'Simple todo app'
+      title: 'Simple todo app',
+      counter: 0
     };
   }
 
   render() {
+    let todos = this.state.todos;
     return (
       <div>
         <h1>Todo List CRUD</h1>
@@ -38,6 +46,17 @@ class App extends Component {
           <input type="text" ref="description" placeholder="description of the todo" />
           <button onClick={this.addTodo} type="submit">Add</button>
         </form>
+
+        <pre>
+          {JSON.stringify(todos)}
+        </pre>
+
+        <ul>
+          {todos.map((todo, index) => {
+            return <li key={index}>{todo.name}</li>
+          })}
+        </ul>
+
       </div>
     );
   }
