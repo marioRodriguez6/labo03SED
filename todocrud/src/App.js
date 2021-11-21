@@ -25,6 +25,9 @@ class App extends Component {
       todos: todos,
       counter: counter
     });
+
+    this.refs.todoForm.reset();
+
   }
 
   constructor(){
@@ -41,7 +44,7 @@ class App extends Component {
     return (
       <div>
         <h1>Todo List CRUD</h1>
-        <form>
+        <form ref="todoForm">
           <input type="text" ref="name" placeholder="Name of the todo "/>
           <input type="text" ref="description" placeholder="description of the todo" />
           <button onClick={this.addTodo} type="submit">Add</button>
@@ -52,9 +55,9 @@ class App extends Component {
         </pre>
 
         <ul>
-          {todos.map((todo, index) => {
-            return <li key={index}>{todo.name}</li>
-          })}
+          {todos.map((todo) => (
+             <li key={todo.counter}>{todo.name}</li>
+          ))}
         </ul>
 
       </div>
