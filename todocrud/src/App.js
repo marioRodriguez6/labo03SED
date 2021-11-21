@@ -3,6 +3,17 @@ import React, { Component } from 'react';
 class App extends Component {
   state = { }
 
+  deleteTodo = (index) => {
+    let todos = this.state.todos;
+
+    let originalArray = todos.filter((todo) => {
+      return todo.counter !== index;
+    })
+
+    this.setState({
+      todos: originalArray
+    })
+  }
   addTodo = (event) => {
     event.preventDefault();
     let name = this.refs.name.value;
@@ -56,7 +67,9 @@ class App extends Component {
 
         <ul>
           {todos.map((todo) => (
-             <li key={todo.counter}>{todo.name}</li>
+             <li key={todo.counter}>{todo.name}
+              <button onClick={this.deleteTodo.bind(null,todo.counter)}>Delete</button>
+             </li>
           ))}
         </ul>
 
